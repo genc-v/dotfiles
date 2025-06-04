@@ -1,0 +1,42 @@
+(defsrc
+  IntlBackslash  1    2    3    4    5       6    7    8    9    0       -    =    bspc
+  tab            q    w    e    r    t       y    u    i    o    p       [    ]    ret 
+  caps           a    s    d    f    g       h    j    k    l    ;       '    \ 
+  lsft   `       z    x    c    v    b       n    m    ,    .    /       rsft
+  lctl           lalt lmet          spc            rmet ralt
+)
+
+(defvar
+  ;; Core timing parameters
+  tap-time 150        
+  hold-time 150       
+  
+  ;; Advanced behaviors
+  permissive-hold 1   
+  quick-tap-term 120  
+  
+  ;; Optional: Individual key timing overrides
+  a_mod-hold-time 160 
+  sc_mod-tap-time 140 
+)
+
+(defalias
+  ;; Home Row Mods with optimized timing
+  a_mod  (tap-hold $tap-time $a_mod-hold-time a lctl)
+  s_mod  (tap-hold $tap-time $hold-time s lsft)
+  d_mod  (tap-hold $tap-time $hold-time d lmet)
+  f_mod  (tap-hold $tap-time $hold-time f lalt)
+
+  j_mod  (tap-hold $tap-time $hold-time j lalt)
+  k_mod  (tap-hold $tap-time $hold-time k lmet)
+  l_mod  (tap-hold $tap-time $hold-time l lsft)
+  sc_mod (tap-hold $sc_mod-tap-time $hold-time ; lctl)
+)
+
+(deflayer default
+  IntlBackslash  1    2    3    4    5       6    7    8    9    0       -    =    bspc
+  tab            q    w    e    r    t       y    u    i    o    p       [    ]    ret
+  caps           @a_mod @s_mod @d_mod @f_mod g       h    @j_mod @k_mod @l_mod @sc_mod '    \
+  lsft   `       z    x    c    v    b       n    m    ,    .    /       rsft
+  lctl           lalt lmet          spc            rmet ralt
+)
